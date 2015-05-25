@@ -56,7 +56,7 @@ Creating a new directory before you run Bayexer is recommended.
 
 Format of the sample sheet file:  
  
-`#Name   Index1  Index2  5119606   `   
+`#Name   Index1  Index2  amount   `   
 `RG1     AATTCAA CATCCGG 33073   `   
 `RG2     CGCGCAG TCATGGT 16898   `   
 `RG3     AAGGTCT AGAACCG 19618   `   
