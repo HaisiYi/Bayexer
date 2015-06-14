@@ -44,7 +44,7 @@ my $OPT_priorP         = 'auto';
 my $OPT_naiveUse       = 5;
 my $OPT_useOVA         = 150;
 my $OPT_confidence     = 0.95;
-my $OPT_throwLine      = 10;
+my $OPT_throwLine      = 20;
 
 my $MLminQuality   = 10;
 my $ML             = 0;
@@ -183,9 +183,10 @@ my $barcodeLength = 2*$barcodeOneLength;
 
 
 #### smoothing and P calculation
+my %smooth = ();
 my @TrainSec = ();
 my @TrainSecOVA = ();
-
+&smoothAlpha();
 &computeTrainSec();
 &computeTrainSecOVA();
 ####
@@ -202,7 +203,7 @@ my %hForDecision = ();
 
 #$stats->checkpoint("after secondary calc");
 
-#print total_size(\@Train),"\t",total_size(\@TrainSec),"\t",total_size(\%TrainSecOVA),"\n"; # for test only
+#print total_size(\@Train),"\t",total_size(\@TrainSec),"\t",total_size(\@TrainSecOVA),"\t",total_size(\%hAllBarcode),"\t",total_size(\%hDirectBase),"\n"; # for test only
 
 #### dump the big data structures (for develop use only)
 &dumpBigData() if $dev == 1;
@@ -581,15 +582,21 @@ sub inferPriorP {
 }
 ####
 
+sub smoothAlpha {
+	for my $idx (values%hCodeToClass) {
+		$smooth{$idx} = (($hBothSum{$idx}+1/$indexTotal)/($sumEvidenceBoth+1))/$indexTotal;
+	}
+}
+
 sub computeTrainSec {	
 	print &checkTime()."Bayes module: computation of P of each feature begins.\n";
 	foreach my $feature (0 .. $#Train) {
 		foreach my $k (keys%{$Train[$feature]}) {
 			foreach my $idx (values%hCodeToClass){
 				$TrainSec[$feature]{$k}{$idx} =
-					($Train[$feature]{$k}{$idx} + (($hBothSum{$idx}+1/$indexTotal)/($sumEvidenceBoth+1))/$indexTotal )
+					($Train[$feature]{$k}{$idx} + $smooth{$idx} )
 					/
-					($hBothSum{$idx} + (scalar keys%{$Train[$feature]})*((($hBothSum{$idx}+1/$indexTotal)/($sumEvidenceBoth+1))/$indexTotal) );
+					($hBothSum{$idx} + (scalar keys%{$Train[$feature]})*$smooth{$idx} );
 			}
 		}
 	}
@@ -602,13 +609,13 @@ sub computeTrainSecOVA {
 		foreach my $k (keys%{$Train[$feature]}) {
 			foreach my $idx (values%hCodeToClass){
 				$TrainSecOVA[$feature]{$k}{$idx} =
-					((sum(values%hBothSum)-$hBothSum{$idx} + (scalar keys%{$Train[$feature]})*((($hBothSum{$idx}+1/$indexTotal)/($sumEvidenceBoth+1))/$indexTotal) )
+					( (sum(values%hBothSum) - $hBothSum{$idx} + (scalar keys%{$Train[$feature]})*$smooth{$idx} )
 					/
-					(sum(values%{$Train[$feature]{$k}})-$Train[$feature]{$k}{$idx} + (($hBothSum{$idx}+1/$indexTotal)/($sumEvidenceBoth+1))/$indexTotal ))
+					(sum(values%{$Train[$feature]{$k}}) - $Train[$feature]{$k}{$idx} + $smooth{$idx} ))
 					*
-					(($Train[$feature]{$k}{$idx} + (($hBothSum{$idx}+1/$indexTotal)/($sumEvidenceBoth+1))/$indexTotal )
+					( ($Train[$feature]{$k}{$idx} + $smooth{$idx} )
 					/
-					($hBothSum{$idx} + (scalar keys%{$Train[$feature]})*((($hBothSum{$idx}+1/$indexTotal)/($sumEvidenceBoth+1))/$indexTotal) ));
+					($hBothSum{$idx} + (scalar keys%{$Train[$feature]})*$smooth{$idx} ));
 			}
 		}
 	}
