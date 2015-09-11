@@ -63,9 +63,9 @@ Input/Ouput Options:
 -j    the fastq file(s) of index reads
 -o    the output directory in which the demultiplexed fastq files will be put
 -x    the file of sample-index list
--q    the quality score type(phred33 or phred64) [$OPT_qType]
+-q    the quality score type (phred33 or phred64) [$OPT_qType]
 
-Taining Data Extraction Options
+Training Data Extraction Options
 -a    the pre-index1 adapter sequence [$OPT_adapterSeq1]
 -b    the pre-index2 adapter sequence [$OPT_adapterSeq2]
 -u    use last N bases of the pre-index sequence in the search [$OPT_useAdapter]
@@ -149,7 +149,7 @@ elsif($indexTYPE == 1){
 #$stats->checkpoint("after index read");
 
 
-#### seatch the train data set
+#### search the train data set
 my %hBothSum = ();
 my @Train = ();
 my %hAllBarcode = ();
@@ -461,7 +461,7 @@ sub searchTrainData {
 		#### search for evidences
 		my ($find1, $find2, $pos1, $pos2) = (0, 0, 0, 0);
 		foreach my $searchSeq (keys%hIndex1WithAdapter){
-			if($pos1 = index($read1, $searchSeq) + 1){ # find adapters contain barcodes
+			if($pos1 = index($read1, $searchSeq) + 1){ # find adapters that contain barcodes
 				$find1 = $hIndex1WithAdapter{$searchSeq};
 				last;
 			}
