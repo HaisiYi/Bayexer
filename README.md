@@ -68,7 +68,7 @@ The first column is the names of samples. The second column is the sequences of 
 If you are not sure which type of score to use for you data, there are some useful information http://en.wikipedia.org/wiki/FASTQ_format   
 
    
-_**Taining Data Extraction Options**_   
+_**Training Data Extraction Options**_   
 * **-a**    the pre-index1 adapter sequence [GATCGGAAGAGCACACGTCTGAACTCCAGTCAC]   
 * **-b**    the pre-index2 adapter sequence [AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT]   
 
