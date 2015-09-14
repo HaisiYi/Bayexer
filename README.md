@@ -103,7 +103,7 @@ For the sequenced index with total occurrences lower than this value, Bayexer wi
 
 If the maximum posteriori probability of a sequenced index is smaller than this value, it will be labelled 'untrusted'.   
 
-* **-l**    the minimum occurence frequency of a sequenced index to be considered in the Bayes Module [10]   
+* **-l**    the minimum occurence frequency of a sequenced index to be considered in the Bayes Module [20]   
 
 If the total occurrences of a sequenced index is lower than this value, it will be labelled 'untrusted'.   
    
