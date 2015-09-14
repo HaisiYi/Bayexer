@@ -72,26 +72,26 @@ _**Training Data Extraction Options**_
 * **-a**    the pre-index1 adapter sequence [GATCGGAAGAGCACACGTCTGAACTCCAGTCAC]   
 * **-b**    the pre-index2 adapter sequence [AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT]   
 
-The pre-index adapter sequences are crucial for Bayexer, you should make sure they are exactly correct for you input data. The sequence information is available at Illumina website. The default values are compatible with most of Illumina TrueSeq Kits.   
+The pre-index adapter sequences are crucial for Bayexer, you should make sure they are exactly correct for your input data. The sequence information is available at Illumina website. The default values are compatible with most of Illumina TrueSeq Kits.   
 
 * **-u**    use last N bases of the pre-index sequence in the search [8]   
 
-This parameter indicates how many bases of the adapter adjacent to the 5'-end of index are used in the training set search process. Recommendation: 7-10 for double-index data, and 12-18 for single-index data.    
+This parameter indicates how many bases of the adapter adjacent to the 5'-end of index are used in the training set search process. Recommendation: 7-12 for double-index data, and 12-18 for single-index data.    
 
 * **-d**    the relative direction of the index 2 and its upstream adapter sequence (ff or fr) [ff]   
 
 This parameter indicates the relative direction between the second index and its upstream adapter sequence. For most of the library building and sequencing strategies, the default ff is correct.    
 
-* **-n**    the minimum quality score of the index bases in common reads to accept in the training data searching [5]   
+* **-n**    the minimum quality score of the index bases in common reads to be accepted in the training data searching [5]   
 
-This parameter indicates the lowest quality score of the index bases found in the common reads to accept as a training data. Even one base of them drops below this value, it is not added to the training set.
+This parameter indicates the lowest quality score of the index bases found in the common reads to accept as a training data. Even if one base of them drops below this value, the whole record is not added to the training set.
 
 _**Options Concerning the Estimation Accuracy**_   
 * **-p**    turn on/off the inference of prior probability(auto/infer) [auto]   
 
 If -p is set to 'auto', Bayexer will first try to compute the priori probabilities according to the values provided in the last column of sample sheet file, if they are unavailable Bayexer will infer the priori probabilities from the input data itself. If -p is set to 'infer', Bayexer just directly makes the inference and ignores the last column of sample sheet.
 
-* **-f**    the minimum number of evidences of a feature to be used in Naive Bayes [5]    
+* **-f**    the minimum number of evidences of a feature to be used in Naive Bayes Classifier[5]    
 
 The minimun number of evidences during the feature selection progress. If the total amount of training data are very large, you can set this value greater, or staying default is a safer choice.   
 
@@ -101,11 +101,11 @@ For the sequenced index with total occurrences lower than this value, Bayexer wi
 
 * **-c**    the minimum P to be trusted [0.95]   
 
-If the maximum posteriori probability of a sequenced index is smaller than this value, it is labelled 'untrusted'.   
+If the maximum posteriori probability of a sequenced index is smaller than this value, it will be labelled 'untrusted'.   
 
 * **-l**    the minimum occurence frequency of a sequenced index to be considered in the Bayes Module [10]   
 
-If the total occurrences of a sequenced index is lower than this value, it is labelled 'untrusted'.   
+If the total occurrences of a sequenced index is lower than this value, it will be labelled 'untrusted'.   
    
 * **--help**    this help information   
 * **--dev**    for develop use only   
