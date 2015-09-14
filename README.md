@@ -65,7 +65,7 @@ The first column is the names of samples. The second column is the sequences of 
 
 * **-q**    the quality score type (phred33 or phred64) [33]   
 
-If you are not sure which type of score to use for you data, there are some useful information http://en.wikipedia.org/wiki/FASTQ_format   
+If you are not sure which type of score to use for your data, there are some useful information http://en.wikipedia.org/wiki/FASTQ_format   
 
    
 _**Training Data Extraction Options**_   
