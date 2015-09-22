@@ -61,9 +61,9 @@ Creating a new directory before you run Bayexer is recommended.
 Format of the sample sheet file:  
  
 `#Name   Index1  Index2  amount   `   
-`RG1     AATTCAA CATCCGG 33073   `   
-`RG2     CGCGCAG TCATGGT 16898   `   
-`RG3     AAGGTCT AGAACCG 19618   `   
+`Sample1 AATTCAA CATCCGG 3   `   
+`Sample2 CGCGCAG TCATGGT 2   `   
+`Sample3 AAGGTCT AGAACCG 1   `   
 
 The first column is the names of samples. The second column is the sequences of first index, and if necessary the third column is the sequences of second index (should have the same number of bases with the first index). The last column is optional which contains the values of relative amount of each sample. Lines with # at the begining are ignored.    
 
