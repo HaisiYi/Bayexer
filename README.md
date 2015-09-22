@@ -58,7 +58,7 @@ Creating a new directory before you run Bayexer is recommended.
 
 * **-x**    the file of sample-index list   
 
-Format of the sample sheet file:  
+An example of the format of the sample sheet file:  
  
 `#Name   Index1  Index2  amount   `   
 `Sample1 AATTCAA CATCCGG 3   `   
