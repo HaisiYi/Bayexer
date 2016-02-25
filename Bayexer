@@ -460,14 +460,14 @@ sub searchTrainData {
 
 		#### search for evidences
 		my ($find1, $find2, $pos1, $pos2) = (0, 0, 0, 0);
-		foreach my $searchSeq (keys%hIndex1WithAdapter){
+		foreach my $searchSeq (keys %hIndex1WithAdapter){
 			if($pos1 = index($read1, $searchSeq) + 1){ # find adapters that contain barcodes
 				$find1 = $hIndex1WithAdapter{$searchSeq};
 				last;
 			}
 		}
 		next SEARCH unless $find1;
-		foreach my $searchSeq (keys%hIndex2WithAdapter){
+		foreach my $searchSeq (keys %hIndex2WithAdapter){
 			if($pos2 = index($read2, $searchSeq) + 1){
 				$find2 = $hIndex2WithAdapter{$searchSeq};
 				last;
@@ -478,11 +478,11 @@ sub searchTrainData {
 
 		#### build module
 		my $find = $find1.$find2;
-		if(exists$hCodeToName{$find}){
-			foreach ($pos1-1+$OPT_useAdapter .. $pos1+$OPT_useAdapter+$indexOneLength){
+		if(exists $hCodeToName{$find}){
+			foreach ($pos1 - 1 + $OPT_useAdapter .. $pos1 + $OPT_useAdapter + $indexOneLength){
 				next SEARCH if vec($qual1, $_, 8) < $minChar;
 			}
-			foreach ($pos2-1+$OPT_useAdapter .. $pos2+$OPT_useAdapter+$indexOneLength){
+			foreach ($pos2 - 1 + $OPT_useAdapter .. $pos2 + $OPT_useAdapter + $indexOneLength){
 				next SEARCH if vec($qual2, $_, 8) < $minChar;
 			}
 			$hDirectBase{$counter} = $hCodeToClass{$find};
@@ -492,12 +492,14 @@ sub searchTrainData {
 		}
 		#### build end
 	}
-	close $_ for @inHandle,@idxHandle;
+	close $_ for @inHandle, @idxHandle;
 	
 	print &checkTime()."Train Set search finished.\n";
-	$sumEvidenceBoth = sum(values%hBothSum);
+	$sumEvidenceBoth = sum(values %hBothSum);
+	die "Total evidence: 0; No training data found, please check your adapter and index sequences.\n" 
+		if $sumEvidenceBoth == 0;
 	print "Total evidence: $sumEvidenceBoth\n";
-	print "\t$hClassToCode{$_}: $hBothSum{$_}\n" for keys%hBothSum;
+	print "\t$hClassToCode{$_}: $hBothSum{$_}\n" for keys %hBothSum;
 }
 
 sub searchTrainData_sin {
@@ -527,7 +529,7 @@ sub searchTrainData_sin {
 
 		#### search for evidences
 		my ($find, $pos) = (0, 0);
-		foreach my $searchSeq (keys%hIndex1WithAdapter){
+		foreach my $searchSeq (keys %hIndex1WithAdapter){
 			if($pos = index($read, $searchSeq) + 1){ # find adapters contain barcodes
 				$find = $hIndex1WithAdapter{$searchSeq};
 				last;
@@ -550,8 +552,10 @@ sub searchTrainData_sin {
 	
 	print &checkTime()."Train Set search finished.\n";
 	$sumEvidenceBoth = sum(values%hBothSum);
+	die "Total evidence: 0; No training data found, please check your adapter and index sequences.\n" 
+		if $sumEvidenceBoth == 0;
 	print "Total evidence: $sumEvidenceBoth\n";
-	print "\t$hClassToCode{$_}: $hBothSum{$_}\n" for keys%hBothSum;
+	print "\t$hClassToCode{$_}: $hBothSum{$_}\n" for keys %hBothSum;
 }
 
 ####
