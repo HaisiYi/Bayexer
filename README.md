@@ -86,7 +86,7 @@ The pre-index adapter sequences are CRUCIAL for Bayexer, you should MAKE SURE th
 * **-u**    use last N bases of the pre-index sequence in the search [8]   
 
 This parameter indicates how many bases of the adapter adjacent to the 5'-end of index are used in the training set search process. Recommendation: 7-12 for double-index data, and 12-18 for single-index data. 
-Tip: the MORE the BETTER on the amount of found training records for each sample. If you found some of the samples have low amounts (eg. lower than 100) of training records, try setting lower values on the -u and -n parameters (but not too low, never lower than 7).
+Tip: the MORE the BETTER on the amount of found training records for each sample. If you found some of the samples have low amounts (eg. lower than 100) of training records, try setting lower values on the -u and -n parameters (but not too low, -u never lower than 7).
 
 * **-d**    the relative direction of the index 2 and its upstream adapter sequence (ff or fr) [ff]   
 
