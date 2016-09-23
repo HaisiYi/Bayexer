@@ -55,7 +55,7 @@ one or two fastq files are acceptable.
 
 * **-j**    the fastq file(s) of index reads   
 
-one or two fastq files are acceptable. If only one file is assigned to -j, Bayexer treat the input dataset single-indexed. If two files are assigned to -j, the dataset is treated as double-indexed. 
+one or two fastq files are acceptable. If only one file is assigned to -j, Bayexer treats the input dataset single-indexed. If two files are assigned to -j, the dataset is treated as double-indexed. 
 
 * **-o**    the output directory in which the demultiplexed fastq files will be put   
 
@@ -81,17 +81,18 @@ _**Training Data Extraction Options**_
 * **-a**    the pre-index1 adapter sequence [GATCGGAAGAGCACACGTCTGAACTCCAGTCAC]   
 * **-b**    the pre-index2 adapter sequence [AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT]   
 
-The pre-index adapter sequences are crucial for Bayexer, you should make sure they are exactly correct for your input data. The sequence information is available at Illumina website. The default values are compatible with most of Illumina TrueSeq Kits.   
+The pre-index adapter sequences are CRUCIAL for Bayexer, you should MAKE SURE they are exactly CORRECT for your input data. The sequence information of the official library building kits is available at Illumina website. The default values of Bayexer are compatible with most of Illumina TrueSeq Kits.
 
 * **-u**    use last N bases of the pre-index sequence in the search [8]   
 
-This parameter indicates how many bases of the adapter adjacent to the 5'-end of index are used in the training set search process. Recommendation: 7-12 for double-index data, and 12-18 for single-index data.    
+This parameter indicates how many bases of the adapter adjacent to the 5'-end of index are used in the training set search process. Recommendation: 7-12 for double-index data, and 12-18 for single-index data. 
+Tip: the MORE the BETTER on the amount of found training records for each sample. If you found some of the samples have low amounts (eg. lower than 100) of training records, try setting lower values on the -u and -n parameters (but not too low, never lower than 7).
 
 * **-d**    the relative direction of the index 2 and its upstream adapter sequence (ff or fr) [ff]   
 
 This parameter indicates the relative direction between the second index and its upstream adapter sequence. For most of the library building and sequencing strategies, the default ff is correct.    
 
-* **-n**    the minimum quality score of the index bases in common reads to be accepted in the training data searching [5]   
+* **-n**    the minimum quality score of the index bases in common reads to be accepted in the training data searching [5]
 
 This parameter indicates the lowest quality score of the index bases found in the common reads to accept as a training data. Even if one base of them drops below this value, the whole record is not added to the training set.
 
@@ -117,4 +118,4 @@ If the maximum posteriori probability of a sequenced index is smaller than this 
 If the total occurrences of a sequenced index is lower than this value, it will be labelled 'untrusted'.   
    
 * **--help**    this help information   
-* **--dev**    for develop use only   
+* **--dev**    for developer use only
