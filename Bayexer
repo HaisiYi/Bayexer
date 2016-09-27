@@ -499,7 +499,7 @@ sub searchTrainData {
 	die "Total evidence: 0; No training data found, please check your adapter and index sequences.\n" 
 		if $sumEvidenceBoth == 0;
 	print "Total evidence: $sumEvidenceBoth\n";
-	print "\t$hClassToCode{$_}: $hBothSum{$_}\n" for keys %hBothSum;
+	print "\t$hClassToCode{$_}: ".($hBothSum{$_}||0)."\n" for keys %hClassToCode;
 }
 
 sub searchTrainData_sin {
@@ -555,7 +555,7 @@ sub searchTrainData_sin {
 	die "Total evidence: 0; No training data found, please check your adapter and index sequences.\n" 
 		if $sumEvidenceBoth == 0;
 	print "Total evidence: $sumEvidenceBoth\n";
-	print "\t$hClassToCode{$_}: $hBothSum{$_}\n" for keys %hBothSum;
+	print "\t$hClassToCode{$_}: ".($hBothSum{$_}||0)."\n" for keys %hClassToCode;
 }
 
 ####
